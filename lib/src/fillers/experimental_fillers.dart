@@ -62,7 +62,7 @@ class _WaveFiller extends Filler {
   OpSet fill(List<PointD> points) {
     // This would implement a wave-like fill pattern
     // For now, delegate to HachureFiller as a placeholder
-    return HachureFiller(config).fill(points);
+    return HachureFiller(super._config).fill(points);
   }
 }
 
@@ -74,6 +74,6 @@ class _GridFiller extends Filler {
   OpSet fill(List<PointD> points) {
     // This would implement a grid fill pattern
     // For now, delegate to HachureFiller as a placeholder
-    return HachureFiller(config).fill(points);
+    return HachureFiller(super._config).fill(points);
   }
 }

@@ -3,7 +3,6 @@
 /// These fillers are more complex and less commonly used, making them
 /// good candidates for dynamic loading to reduce initial bundle size.
 
-import '../entities.dart';
 import '../filler.dart';
 import 'filler_registry.dart';
 
