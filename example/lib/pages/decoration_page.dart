@@ -1,24 +1,25 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rough/rough.dart';
 
 class DecorationExamplePage extends StatelessWidget {
+  const DecorationExamplePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text('RoughDecorator example')),
-        body: Container(
+        body: SizedBox(
           width: double.infinity,
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-            children: <Widget>[
-              const NiceBox(),
-              const SizedBox(height: 32),
-              const HighlightedText(),
-              const SizedBox(height: 32),
-              const CircledIcon(),
-              const SizedBox(height: 32),
-              const SecretText(),
+            children: const <Widget>[
+              NiceBox(),
+              SizedBox(height: 32),
+              HighlightedText(),
+              SizedBox(height: 32),
+              CircledIcon(),
+              SizedBox(height: 32),
+              SecretText(),
             ],
           ),
         ));
@@ -27,15 +28,15 @@ class DecorationExamplePage extends StatelessWidget {
 
 class NiceBox extends StatelessWidget {
   const NiceBox({
-    Key key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: RoughBoxDecoration(
           shape: RoughBoxShape.rectangle,
-          borderStyle: RoughDrawingStyle(
+          borderStyle: const RoughDrawingStyle(
             width: 4,
             color: Colors.orange,
           ),
@@ -55,8 +56,8 @@ class NiceBox extends StatelessWidget {
 
 class HighlightedText extends StatelessWidget {
   const HighlightedText({
-    Key key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,8 @@ class HighlightedText extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       decoration: RoughBoxDecoration(
         shape: RoughBoxShape.rectangle,
-        filler: ZigZagFiller(FillerConfig.defaultConfig.copyWith(hachureGap: 6, hachureAngle: 110)),
+        filler: ZigZagFiller(FillerConfig.defaultConfig
+            .copyWith(hachureGap: 6, hachureAngle: 110)),
         fillStyle: RoughDrawingStyle(color: Colors.yellow[600], width: 6),
       ),
       child: const Text(
@@ -77,8 +79,8 @@ class HighlightedText extends StatelessWidget {
 
 class CircledIcon extends StatelessWidget {
   const CircledIcon({
-    Key key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -93,26 +95,26 @@ class CircledIcon extends StatelessWidget {
           curveStepCount: 6,
         ),
         filler: SolidFiller(FillerConfig.defaultConfig),
-        borderStyle: RoughDrawingStyle(
+        borderStyle: const RoughDrawingStyle(
           color: Colors.lightGreen,
           width: 6,
         ),
       ),
-      child: Icon(Icons.format_paint),
+      child: const Icon(Icons.format_paint),
     );
   }
 }
 
 class SecretText extends StatelessWidget {
   const SecretText({
-    Key key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        style: TextStyle(color: Colors.black, fontSize: 18),
+        style: const TextStyle(color: Colors.black, fontSize: 18),
         text: 'This text has a ',
         children: <InlineSpan>[
           WidgetSpan(
@@ -125,11 +127,11 @@ class SecretText extends StatelessWidget {
                   hachureGap: 5,
                   drawConfig: DrawConfig.build(roughness: 3),
                 )),
-                fillStyle: RoughDrawingStyle(
+                fillStyle: const RoughDrawingStyle(
                   color: Colors.brown,
                   width: 2,
                 )),
-            child: Text(
+            child: const Text(
               'secret text',
               style: TextStyle(color: Colors.black, fontSize: 18),
             ),

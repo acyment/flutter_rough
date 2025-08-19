@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dart analyze:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(flutter test:*)",
+      "Bash(dart:*)",
+      "Bash(git checkout:*)",
+      "Bash(chmod:*)",
+      "Bash(flutter pub:*)",
+      "Bash(grep:*)",
+      "Bash(rm:*)",
+      "Bash(find:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(git remote add:*)"
+    ],
+    "deny": []
+  }
+}

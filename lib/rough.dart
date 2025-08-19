@@ -1,6 +1,43 @@
+/// A Flutter implementation of the rough.js library for creating sketchy,
+/// hand-drawn-like graphics.
+///
+/// This library provides tools to create graphics that appear to be drawn
+/// by hand, with various customization options for roughness, fill styles,
+/// and drawing parameters.
+///
+/// ## Basic Usage
+///
+/// ```dart
+/// import 'package:rough/rough.dart';
+///
+/// // Create a rough canvas
+/// final roughCanvas = Rough.canvas(canvas);
+///
+/// // Draw a rough rectangle
+/// roughCanvas.rectangle(10, 10, 100, 80);
+///
+/// // Draw with custom configuration
+/// final config = DrawConfig.build(
+///   roughness: 2.0,
+///   bowing: 1.5,
+/// );
+/// final filler = HachureFiller();
+/// final generator = Generator(config, filler);
+///
+/// final drawable = generator.circle(50, 50, 40);
+/// canvas.drawRough(drawable, paint, fillPaint);
+/// ```
+///
+/// ## Main Components
+///
+/// - [DrawConfig]: Configuration for drawing parameters
+/// - [Generator]: Creates drawable objects for various shapes
+/// - [Filler]: Defines fill patterns (hachure, solid, zigzag, etc.)
+/// - [RoughBoxDecoration]: Flutter decoration for rough-styled containers
 library rough;
 
 export 'src/config.dart';
+export 'src/core.dart';
 export 'src/decoration.dart';
 export 'src/entities.dart';
 export 'src/filler.dart';

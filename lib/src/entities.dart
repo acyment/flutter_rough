@@ -5,15 +5,14 @@ import 'core.dart';
 import 'geometry.dart';
 
 class Drawable {
-  String shape;
+  Drawable({this.shape, required this.options, required this.sets});
+  String? shape;
   DrawConfig options;
   List<OpSet> sets;
-
-  Drawable({this.shape, this.options, this.sets});
 }
 
 class PointD extends Point<double> {
-  PointD(double x, double y) : super(x, y);
+  PointD(super.x, super.y);
 
   bool isInPolygon(List<PointD> points) {
     final int vertices = points.length;
@@ -28,7 +27,8 @@ class PointD extends Point<double> {
       final PointD current = points[i];
       final PointD next = points[(i + 1) % vertices];
       if (Line(current, next).intersects(Line(this, extreme))) {
-        if (getOrientation(current, this, next) == PointsOrientation.collinear) {
+        if (getOrientation(current, this, next) ==
+            PointsOrientation.collinear) {
           return Line(current, next).onSegment(this);
         }
         count++;
