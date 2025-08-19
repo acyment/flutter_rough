@@ -89,6 +89,9 @@ abstract class Filler {
   }
   late FillerConfig _config;
 
+  /// Protected getter to access config from subclasses
+  FillerConfig get config => _config;
+
   OpSet fill(List<PointD> points);
 
   List<Line> buildFillLines(List<PointD> points, FillerConfig? config) {
