@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 class DecorationExamplePage extends StatelessWidget {
   const DecorationExamplePage({super.key});

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 import 'geometry.dart';
 import 'renderer.dart';

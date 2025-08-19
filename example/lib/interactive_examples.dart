@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 import 'interactive_canvas.dart';
 

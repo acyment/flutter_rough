@@ -8,7 +8,7 @@
 /// ## Basic Usage
 ///
 /// ```dart
-/// import 'package:rough/rough.dart';
+/// import 'package:rough_flutter/rough_flutter.dart';
 ///
 /// // Create a rough canvas
 /// final roughCanvas = Rough.canvas(canvas);
@@ -43,3 +43,5 @@ export 'src/entities.dart';
 export 'src/filler.dart';
 export 'src/generator.dart';
 export 'src/rough.dart';
+export 'src/rough_web_optimized.dart';
+export 'src/rough_mobile_web.dart';

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 class RoughDrawingStyle {
   // TODO: final BorderRadius borderRadius;

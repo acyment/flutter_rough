@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 class DiscreteProperty {
   DiscreteProperty(
@@ -136,87 +136,119 @@ class _InteractiveBodyState extends State<InteractiveBody>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Expanded(
-          child: Card(
-            child: InteractiveCanvas(
-              example: widget.example,
-              drawConfigValues: drawConfigValues,
-              fillerConfigValues: fillerConfigValues,
-              fillerType: fillerType,
+    return RoughMobileLayout(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Expanded(
+            child: Card(
+              child: InteractiveCanvas(
+                example: widget.example,
+                drawConfigValues: drawConfigValues,
+                fillerConfigValues: fillerConfigValues,
+                fillerType: fillerType,
+              ),
             ),
           ),
-        ),
-        TabBar(
-          controller: _tabController,
-          tabs: const <Widget>[
-            ConfigTab(label: 'Draw', iconData: Icons.border_color),
-            ConfigTab(label: 'Filler', iconData: Icons.format_color_fill),
-          ],
-          onTap: (index) => setState(() => _tabController.index = index),
-        ),
-        SizedBox(
-          height: 200,
-          child: IndexedStack(
-            sizing: StackFit.expand,
-            index: _tabController.index,
-            children: <Widget>[
-              ListView(
-                children: DiscreteProperty.drawConfigProperties
-                    .map(
-                      (property) => PropertySlider(
-                        label: property.name,
-                        value: drawConfigValues[property.name] ?? 0,
-                        min: property.min,
-                        max: property.max,
-                        steps: property.steps,
-                        onChange: (value) => updateDrawingConfig(
-                            property: property.name, value: value),
-                      ),
-                    )
-                    .toList(),
-              ),
-              ListView(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: DropdownButton<String>(
-                      value: fillerType,
-                      isExpanded: false,
-                      onChanged: (value) {
-                        updateFillerType(value: value!);
-                      },
-                      underline: Container(),
-                      items: _fillers.keys
-                          .map((fillerKey) => DropdownMenuItem<String>(
-                                value: fillerKey,
-                                child: Text(fillerKey),
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                  ...DiscreteProperty.fillerConfigProperties
+          TabBar(
+            controller: _tabController,
+            tabs: <Widget>[
+              ConfigTab(label: 'Draw', iconData: Icons.border_color),
+              ConfigTab(label: 'Filler', iconData: Icons.format_color_fill),
+            ],
+            onTap: (index) {
+              setState(() => _tabController.index = index);
+              RoughMobileHaptics.selectionClick();
+            },
+          ),
+          SizedBox(
+            height: RoughMobileWeb.isMobileWeb ? 250 : 200,
+            child: IndexedStack(
+              sizing: StackFit.expand,
+              index: _tabController.index,
+              children: <Widget>[
+                ListView(
+                  children: DiscreteProperty.drawConfigProperties
                       .map(
-                        (property) => PropertySlider(
+                        (property) => RoughMobileSlider(
                           label: property.name,
-                          value: fillerConfigValues[property.name] ?? 0,
+                          value: drawConfigValues[property.name] ?? 0,
                           min: property.min,
                           max: property.max,
-                          steps: property.steps,
-                          onChange: (value) => updateFillerConfig(
-                              property: property.name, value: value),
+                          divisions: property.steps,
+                          onChanged: (value) {
+                            updateDrawingConfig(
+                                property: property.name, value: value);
+                            RoughMobileHaptics.lightImpact();
+                          },
                         ),
                       )
-                      .toList()
-                ],
-              ),
-            ],
-          ),
-        )
-      ],
+                      .toList(),
+                ),
+                ListView(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 120,
+                            child: Text(
+                              'Filler Type:',
+                              style: TextStyle(
+                                fontSize: RoughMobileWeb.isMobileWeb ? 16.0 : 14.0,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: DropdownButton<String>(
+                              value: fillerType,
+                              isExpanded: true,
+                              onChanged: (value) {
+                                updateFillerType(value: value!);
+                                RoughMobileHaptics.selectionClick();
+                              },
+                              underline: Container(),
+                              items: _fillers.keys
+                                  .map((fillerKey) => DropdownMenuItem<String>(
+                                        value: fillerKey,
+                                        child: Text(
+                                          fillerKey,
+                                          style: TextStyle(
+                                            fontSize: RoughMobileWeb.isMobileWeb ? 16.0 : 14.0,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ...DiscreteProperty.fillerConfigProperties
+                        .map(
+                          (property) => RoughMobileSlider(
+                            label: property.name,
+                            value: fillerConfigValues[property.name] ?? 0,
+                            min: property.min,
+                            max: property.max,
+                            divisions: property.steps,
+                            onChanged: (value) {
+                              updateFillerConfig(
+                                  property: property.name, value: value);
+                              RoughMobileHaptics.lightImpact();
+                            },
+                          ),
+                        )
+                        .toList()
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -343,14 +375,17 @@ class InteractiveCanvas extends StatelessWidget {
   }
 }
 
-class InteractivePainter extends CustomPainter {
+class InteractivePainter extends RoughMobileWebPainter {
   InteractivePainter(this.drawConfig, this.filler, this.interactiveExample);
   final DrawConfig drawConfig;
   final Filler filler;
   final InteractiveExample interactiveExample;
 
   @override
-  void paint(Canvas canvas, Size size) {
+  void paintRough(Canvas canvas, Size size, Map<String, dynamic> config) {
+    // Record frame for performance monitoring
+    RoughMobilePerformance.recordFrame();
+    
     drawConfig.randomizer.reset();
     interactiveExample.paintRough(canvas, size, drawConfig, filler);
   }
