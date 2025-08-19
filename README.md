@@ -11,13 +11,20 @@ Rough is a library that allows you draw in a sketchy, hand-drawn-like style. It'
 
 This library is now fully compatible with Dart 3 and includes complete null safety support!
 
+## Recent Updates (v0.1.1)
+
+- **Package Naming**: Fixed package name consistency (`rough` → `rough_flutter`)
+- **Code Optimization**: Cleaned up unused imports and optimized code structure
+- **Error Handling**: Improved error handling in lazy loading widgets
+- **Build Fixes**: Resolved various build and compatibility issues
+
 ## Installation
 
 In the `dependencies:` section of your `pubspec.yaml`, add the following line:
 
 ```yaml
 dependencies:
-  rough: <latest_version>
+  rough_flutter: <latest_version>
 ```
 
 ### Requirements
@@ -111,7 +118,7 @@ canvas.drawRough(circle, pathPaint, fillPaint);
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough.dart';
 
 class RoughExample extends CustomPainter {
   @override
