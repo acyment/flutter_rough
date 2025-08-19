@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-import '../entities.dart';
 import '../filler.dart';
 
 /// Registry for lazy-loaded filler implementations

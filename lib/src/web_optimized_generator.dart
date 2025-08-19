@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-import 'core.dart';
-import 'entities.dart';
 import 'filler.dart';
 import 'generator.dart';
 import 'config.dart';

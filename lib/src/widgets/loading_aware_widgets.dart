@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../filler.dart';
 import '../fillers/filler_registry.dart';
 import '../lazy_loading_manager.dart';
 import '../web_optimized_generator.dart';
@@ -150,6 +151,7 @@ class _LazyFillerDropdownState extends State<LazyFillerDropdown> {
           _errorStates[fillerName] = error.toString();
         });
       }
+      return (FillerConfig config) => throw error;
     });
     
     _listenForLoadingCompletion(fillerName);

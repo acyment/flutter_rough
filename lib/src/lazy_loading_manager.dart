@@ -230,7 +230,3 @@ class LazyLoadingManager {
   }
 }
 
-/// Extension to make unawaited calls more explicit
-extension on Future {
-  void get unawaited {}
-}
