@@ -1,13 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../interactive_canvas.dart';
 
 class ExamplePage extends StatelessWidget {
+  const ExamplePage(
+      {super.key, required this.title, required this.exampleBuilder});
   final String title;
   final InteractiveExample Function() exampleBuilder;
-
-  const ExamplePage({Key key, this.title, this.exampleBuilder}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

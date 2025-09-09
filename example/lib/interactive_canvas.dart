@@ -1,17 +1,20 @@
 import 'dart:collection';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 class DiscreteProperty {
+  DiscreteProperty(
+      {required this.name,
+      required this.min,
+      required this.max,
+      required this.steps,
+      this.value = 0});
   final String name;
   final double max;
   final double min;
   final int steps;
   final double value;
-
-  DiscreteProperty({this.name, this.min, this.max, this.steps, this.value});
 
   static List<DiscreteProperty> drawConfigProperties = [
     DiscreteProperty(name: 'seed', min: 0, max: 50, steps: 50),
@@ -33,23 +36,24 @@ class DiscreteProperty {
   ];
 }
 
-Map<String, Filler Function(FillerConfig)> _fillers = <String, Filler Function(FillerConfig)>{
-  'NoFiller': (fillerConfig) => NoFiller(fillerConfig),
-  'HachureFiller': (fillerConfig) => HachureFiller(fillerConfig),
-  'ZigZagFiller': (fillerConfig) => ZigZagFiller(fillerConfig),
-  'HatchFiller': (fillerConfig) => HatchFiller(fillerConfig),
-  'DotFiller': (fillerConfig) => DotFiller(fillerConfig),
-  'DashedFiller': (fillerConfig) => DashedFiller(fillerConfig),
-  'SolidFiller': (fillerConfig) => SolidFiller(fillerConfig),
+Map<String, Filler Function(FillerConfig)> _fillers =
+    <String, Filler Function(FillerConfig)>{
+  'NoFiller': NoFiller.new,
+  'HachureFiller': HachureFiller.new,
+  'ZigZagFiller': ZigZagFiller.new,
+  'HatchFiller': HatchFiller.new,
+  'DotFiller': DotFiller.new,
+  'DashedFiller': DashedFiller.new,
+  'SolidFiller': SolidFiller.new,
 };
 
 typedef PainterBuilder = InteractivePainter Function(DrawConfig);
 
 class InteractiveExamplePage extends StatelessWidget {
+  const InteractiveExamplePage(
+      {super.key, required this.title, required this.example});
   final String title;
   final InteractiveExample example;
-
-  const InteractiveExamplePage({Key key, this.title, this.example}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,36 +67,41 @@ class InteractiveExamplePage extends StatelessWidget {
 }
 
 class InteractiveBody extends StatefulWidget {
+  const InteractiveBody({super.key, required this.example});
   final InteractiveExample example;
-
-  const InteractiveBody({Key key, this.example}) : super(key: key);
 
   @override
   _InteractiveBodyState createState() => _InteractiveBodyState();
 }
 
-class _InteractiveBodyState extends State<InteractiveBody> with TickerProviderStateMixin {
+class _InteractiveBodyState extends State<InteractiveBody>
+    with TickerProviderStateMixin {
   Map<String, double> drawConfigValues = HashMap<String, double>();
   Map<String, double> fillerConfigValues = HashMap<String, double>();
-  String fillerType;
-  TabController _tabController;
+  late String fillerType;
+  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    drawConfigValues['maxRandomnessOffset'] = DrawConfig.defaultValues.roughness;
+    drawConfigValues['maxRandomnessOffset'] =
+        DrawConfig.defaultValues.roughness;
     drawConfigValues['bowing'] = DrawConfig.defaultValues.roughness;
     drawConfigValues['roughness'] = DrawConfig.defaultValues.roughness;
     drawConfigValues['curveFitting'] = DrawConfig.defaultValues.curveFitting;
-    drawConfigValues['curveTightness'] = DrawConfig.defaultValues.curveTightness;
-    drawConfigValues['curveStepCount'] = DrawConfig.defaultValues.curveStepCount;
+    drawConfigValues['curveTightness'] =
+        DrawConfig.defaultValues.curveTightness;
+    drawConfigValues['curveStepCount'] =
+        DrawConfig.defaultValues.curveStepCount;
     drawConfigValues['seed'] = DrawConfig.defaultValues.seed.toDouble();
     fillerConfigValues['fillWeight'] = FillerConfig.defaultConfig.fillWeight;
-    fillerConfigValues['hachureAngle'] = FillerConfig.defaultConfig.hachureAngle;
+    fillerConfigValues['hachureAngle'] =
+        FillerConfig.defaultConfig.hachureAngle;
     fillerConfigValues['hachureGap'] = FillerConfig.defaultConfig.hachureGap;
     fillerConfigValues['dashOffset'] = FillerConfig.defaultConfig.dashOffset;
     fillerConfigValues['dashGap'] = FillerConfig.defaultConfig.dashGap;
-    fillerConfigValues['zigzagOffset'] = FillerConfig.defaultConfig.zigzagOffset;
+    fillerConfigValues['zigzagOffset'] =
+        FillerConfig.defaultConfig.zigzagOffset;
     fillerType = _fillers.keys.elementAt(0);
     _tabController = TabController(
       length: 2,
@@ -102,8 +111,8 @@ class _InteractiveBodyState extends State<InteractiveBody> with TickerProviderSt
   }
 
   void updateDrawingConfig({
-    String property,
-    double value,
+    required String property,
+    required double value,
   }) {
     setState(() {
       drawConfigValues[property] = value;
@@ -111,15 +120,15 @@ class _InteractiveBodyState extends State<InteractiveBody> with TickerProviderSt
   }
 
   void updateFillerConfig({
-    String property,
-    double value,
+    required String property,
+    required double value,
   }) {
     setState(() {
       fillerConfigValues[property] = value;
     });
   }
 
-  void updateFillerType({String value}) {
+  void updateFillerType({required String value}) {
     setState(() {
       fillerType = value;
     });
@@ -127,94 +136,127 @@ class _InteractiveBodyState extends State<InteractiveBody> with TickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Expanded(
-          child: Card(
-            child: InteractiveCanvas(
-              example: widget.example,
-              drawConfigValues: drawConfigValues,
-              fillerConfigValues: fillerConfigValues,
-              fillerType: fillerType,
+    return RoughMobileLayout(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Expanded(
+            child: Card(
+              child: InteractiveCanvas(
+                example: widget.example,
+                drawConfigValues: drawConfigValues,
+                fillerConfigValues: fillerConfigValues,
+                fillerType: fillerType,
+              ),
             ),
           ),
-        ),
-        TabBar(
-          controller: _tabController,
-          tabs: <Widget>[
-            ConfigTab(label: 'Draw', iconData: Icons.border_color),
-            ConfigTab(label: 'Filler', iconData: Icons.format_color_fill),
-          ],
-          onTap: (index) => setState(() => _tabController.index = index),
-        ),
-        Container(
-          height: 200,
-          child: IndexedStack(
-            sizing: StackFit.expand,
-            index: _tabController.index,
-            children: <Widget>[
-              ListView(
-                children: DiscreteProperty.drawConfigProperties
-                    .map(
-                      (property) => PropertySlider(
-                        label: property.name,
-                        value: drawConfigValues[property.name],
-                        min: property.min,
-                        max: property.max,
-                        steps: property.steps,
-                        onChange: (value) => updateDrawingConfig(property: property.name, value: value),
-                      ),
-                    )
-                    .toList(),
-              ),
-              ListView(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: DropdownButton<String>(
-                      value: fillerType,
-                      isExpanded: false,
-                      onChanged: (value) {
-                        updateFillerType(value: value);
-                      },
-                      underline: Container(),
-                      items: _fillers.keys
-                          .map((fillerKey) => DropdownMenuItem<String>(
-                                value: fillerKey,
-                                child: Text(fillerKey),
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                  ...DiscreteProperty.fillerConfigProperties
+          TabBar(
+            controller: _tabController,
+            tabs: <Widget>[
+              ConfigTab(label: 'Draw', iconData: Icons.border_color),
+              ConfigTab(label: 'Filler', iconData: Icons.format_color_fill),
+            ],
+            onTap: (index) {
+              setState(() => _tabController.index = index);
+              RoughMobileHaptics.selectionClick();
+            },
+          ),
+          SizedBox(
+            height: RoughMobileWeb.isMobileWeb ? 250 : 200,
+            child: IndexedStack(
+              sizing: StackFit.expand,
+              index: _tabController.index,
+              children: <Widget>[
+                ListView(
+                  children: DiscreteProperty.drawConfigProperties
                       .map(
-                        (property) => PropertySlider(
+                        (property) => RoughMobileSlider(
                           label: property.name,
-                          value: fillerConfigValues[property.name],
+                          value: drawConfigValues[property.name] ?? 0,
                           min: property.min,
                           max: property.max,
-                          steps: property.steps,
-                          onChange: (value) => updateFillerConfig(property: property.name, value: value),
+                          divisions: property.steps,
+                          onChanged: (value) {
+                            updateDrawingConfig(
+                                property: property.name, value: value);
+                            RoughMobileHaptics.lightImpact();
+                          },
                         ),
                       )
-                      .toList()
-                ],
-              ),
-            ],
-          ),
-        )
-      ],
+                      .toList(),
+                ),
+                ListView(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 120,
+                            child: Text(
+                              'Filler Type:',
+                              style: TextStyle(
+                                fontSize: RoughMobileWeb.isMobileWeb ? 16.0 : 14.0,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: DropdownButton<String>(
+                              value: fillerType,
+                              isExpanded: true,
+                              onChanged: (value) {
+                                updateFillerType(value: value!);
+                                RoughMobileHaptics.selectionClick();
+                              },
+                              underline: Container(),
+                              items: _fillers.keys
+                                  .map((fillerKey) => DropdownMenuItem<String>(
+                                        value: fillerKey,
+                                        child: Text(
+                                          fillerKey,
+                                          style: TextStyle(
+                                            fontSize: RoughMobileWeb.isMobileWeb ? 16.0 : 14.0,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ...DiscreteProperty.fillerConfigProperties
+                        .map(
+                          (property) => RoughMobileSlider(
+                            label: property.name,
+                            value: fillerConfigValues[property.name] ?? 0,
+                            min: property.min,
+                            max: property.max,
+                            divisions: property.steps,
+                            onChanged: (value) {
+                              updateFillerConfig(
+                                  property: property.name, value: value);
+                              RoughMobileHaptics.lightImpact();
+                            },
+                          ),
+                        )
+                        .toList()
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
 
 class ConfigTab extends StatelessWidget {
+  const ConfigTab({super.key, required this.label, required this.iconData});
   final String label;
   final IconData iconData;
-
-  const ConfigTab({Key key, this.label, this.iconData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -232,6 +274,14 @@ class ConfigTab extends StatelessWidget {
 }
 
 class PropertySlider extends StatefulWidget {
+  const PropertySlider(
+      {super.key,
+      required this.value,
+      required this.label,
+      this.min = 0,
+      this.max = 0,
+      this.steps = 10,
+      required this.onChange});
   final String label;
   final double min;
   final double max;
@@ -239,14 +289,12 @@ class PropertySlider extends StatefulWidget {
   final OnConfigChange onChange;
   final double value;
 
-  const PropertySlider({Key key, this.value, this.label, this.min = 0, this.max = 0, this.steps = 10, this.onChange}) : super(key: key);
-
   @override
   _PropertySliderState createState() => _PropertySliderState();
 }
 
 class _PropertySliderState extends State<PropertySlider> {
-  double configValue;
+  late double configValue;
 
   @override
   void initState() {
@@ -288,18 +336,17 @@ class _PropertySliderState extends State<PropertySlider> {
 typedef OnConfigChange = void Function(double);
 
 class InteractiveCanvas extends StatelessWidget {
+  const InteractiveCanvas({
+    super.key,
+    required this.example,
+    required this.drawConfigValues,
+    required this.fillerConfigValues,
+    required this.fillerType,
+  });
   final InteractiveExample example;
   final Map<String, double> drawConfigValues;
   final Map<String, double> fillerConfigValues;
   final String fillerType;
-
-  const InteractiveCanvas({
-    Key key,
-    this.example,
-    this.drawConfigValues,
-    this.fillerConfigValues,
-    this.fillerType,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -310,17 +357,17 @@ class InteractiveCanvas extends StatelessWidget {
         curveFitting: drawConfigValues['curveFitting'],
         curveTightness: drawConfigValues['curveTightness'],
         curveStepCount: drawConfigValues['curveStepCount'],
-        seed: drawConfigValues['seed'].floor());
+        seed: (drawConfigValues['seed'] ?? 0).floor());
     FillerConfig fillerConfig = FillerConfig.build(
-      fillWeight: fillerConfigValues['fillWeight'],
-      hachureAngle: fillerConfigValues['hachureAngle'],
-      hachureGap: fillerConfigValues['hachureGap'],
-      dashOffset: fillerConfigValues['dashOffset'],
-      dashGap: fillerConfigValues['dashGap'],
-      zigzagOffset: fillerConfigValues['zigzagOffset'],
+      fillWeight: fillerConfigValues['fillWeight'] ?? 1,
+      hachureAngle: fillerConfigValues['hachureAngle'] ?? 320,
+      hachureGap: fillerConfigValues['hachureGap'] ?? 15,
+      dashOffset: fillerConfigValues['dashOffset'] ?? 15,
+      dashGap: fillerConfigValues['dashGap'] ?? 2,
+      zigzagOffset: fillerConfigValues['zigzagOffset'] ?? 5,
       drawConfig: drawConfig,
     );
-    Filler filler = _fillers[fillerType].call(fillerConfig);
+    Filler filler = _fillers[fillerType]!.call(fillerConfig);
     return CustomPaint(
       size: const Size.square(double.infinity),
       painter: InteractivePainter(drawConfig, filler, example),
@@ -328,15 +375,17 @@ class InteractiveCanvas extends StatelessWidget {
   }
 }
 
-class InteractivePainter extends CustomPainter {
+class InteractivePainter extends RoughMobileWebPainter {
+  InteractivePainter(this.drawConfig, this.filler, this.interactiveExample);
   final DrawConfig drawConfig;
   final Filler filler;
   final InteractiveExample interactiveExample;
 
-  InteractivePainter(this.drawConfig, this.filler, this.interactiveExample);
-
   @override
-  paint(Canvas canvas, Size size) {
+  void paintRough(Canvas canvas, Size size, Map<String, dynamic> config) {
+    // Record frame for performance monitoring
+    RoughMobilePerformance.recordFrame();
+    
     drawConfig.randomizer.reset();
     interactiveExample.paintRough(canvas, size, drawConfig, filler);
   }
@@ -348,5 +397,6 @@ class InteractivePainter extends CustomPainter {
 }
 
 abstract class InteractiveExample {
-  void paintRough(Canvas canvas, Size size, DrawConfig drawConfig, Filler filler);
+  void paintRough(
+      Canvas canvas, Size size, DrawConfig drawConfig, Filler filler);
 }

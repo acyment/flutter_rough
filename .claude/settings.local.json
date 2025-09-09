@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dart analyze:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(flutter test:*)",
+      "Bash(dart:*)",
+      "Bash(git checkout:*)",
+      "Bash(chmod:*)",
+      "Bash(flutter pub:*)",
+      "Bash(grep:*)",
+      "Bash(rm:*)",
+      "Bash(find:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(git remote add:*)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)",
+      "Bash(ls:*)",
+      "Bash(flutter config:*)",
+      "Bash(flutter:*)",
+      "Bash(./analyze_bundle.sh:*)",
+      "Bash(/Users/acyment/dev/flutter_rough/analyze_bundle.sh)",
+      "Bash(./analyze_phase3_bundle.sh:*)",
+      "Bash(sed:*)",
+      "Bash(touch:*)",
+      "Bash(mv:*)"
+    ],
+    "deny": []
+  }
+}
