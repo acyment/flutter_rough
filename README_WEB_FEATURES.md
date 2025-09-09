@@ -8,7 +8,7 @@ Flutter Rough now includes comprehensive web optimization with mobile-first desi
 
 ### Basic Web Usage
 ```dart
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 void main() {
   runApp(MyApp());
@@ -199,7 +199,7 @@ dependencies:
 
 ### Basic Setup
 ```dart
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 void main() {
   // Initialize mobile optimizations

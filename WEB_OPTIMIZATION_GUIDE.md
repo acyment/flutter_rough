@@ -79,7 +79,7 @@ Establishes foundational web support with excellent performance and cross-browse
 
 ### Usage
 ```dart
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 // Standard usage - automatically web-optimized
 final generator = Generator();
@@ -279,7 +279,7 @@ LoadingProgressIndicator(
 
 ### 1. Basic Web Setup
 ```dart
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -298,7 +298,7 @@ class MyApp extends StatelessWidget {
 
 ### 2. Mobile-Optimized Setup
 ```dart
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 void main() {
   // Initialize mobile web optimizations
@@ -336,7 +336,7 @@ class MobileOptimizedCanvas extends StatelessWidget {
 
 ### 3. Advanced Lazy Loading Setup
 ```dart
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -771,7 +771,7 @@ print('Paint cache size: ${cacheStats['paintCacheSize']}');
 
 #### Before (Basic Usage)
 ```dart
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 void main() {
   runApp(MyApp());
@@ -789,7 +789,7 @@ class MyCanvas extends StatelessWidget {
 
 #### After (Web-Optimized)
 ```dart
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 void main() {
   RoughMobileWeb.initialize(); // ← Add mobile support
@@ -952,10 +952,10 @@ Widget buildControls() {
 ```dart
 // Avoid importing all fillers at once
 // ❌ Don't do this:
-import 'package:rough/src/filler.dart'; // Imports everything
+import 'package:rough_flutter/src/filler.dart'; // Imports everything
 
 // ✅ Do this instead:
-import 'package:rough/rough.dart'; // Only core exports
+import 'package:rough_flutter/rough_flutter.dart'; // Only core exports
 // Let lazy loading handle the rest
 ```
 

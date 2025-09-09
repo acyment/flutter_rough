@@ -146,7 +146,7 @@ final report = RoughMobilePerformance.getPerformanceReport();
 
 ### Quick Start (Phases 1-2 Ready)
 ```dart
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 void main() {
   // Initialize mobile optimizations

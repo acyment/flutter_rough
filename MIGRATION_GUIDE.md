@@ -32,13 +32,13 @@ Migrate from basic flutter_rough to web-compatible version with PWA support.
 ```yaml
 # pubspec.yaml - No changes needed
 dependencies:
-  rough: ^2.0.0 # Same version, enhanced features
+  rough_flutter: ^0.1.2 # Same package, enhanced features
 ```
 
 #### 2. No Code Changes Required
 ```dart
 // This code works exactly the same - automatically web-optimized!
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 final generator = Generator();
 final drawable = generator.rectangle(10, 10, 100, 80);
