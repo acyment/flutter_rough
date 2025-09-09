@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.2] - 2025-09-07
+
+### Fixes
+- linearPath two-point bug fixed (y-coordinates now correct)
+- drawRough no longer mutates the caller's fill Paint
+- Removed unnecessary umbrella import in filler.dart
+
+### Documentation
+- Updated README badges and package name references to `rough_flutter`
+- Fixed import examples to use `package:rough_flutter/rough_flutter.dart`
+- Switched screenshot links to relative paths for pub.dev rendering
+
 ## [2.0.0] - 2025-08-19
 
 ### 🎉 Major Release: Dart 3 Support

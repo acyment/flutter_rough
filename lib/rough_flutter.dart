@@ -34,14 +34,20 @@
 /// - [Generator]: Creates drawable objects for various shapes
 /// - [Filler]: Defines fill patterns (hachure, solid, zigzag, etc.)
 /// - [RoughBoxDecoration]: Flutter decoration for rough-styled containers
-library rough;
 
 export 'src/config.dart';
 export 'src/core.dart';
 export 'src/decoration.dart';
 export 'src/entities.dart';
 export 'src/filler.dart';
+export 'src/fillers/advanced_fillers.dart';
+export 'src/fillers/basic_fillers.dart';
+export 'src/fillers/experimental_fillers.dart';
+export 'src/fillers/filler_registry.dart';
 export 'src/generator.dart';
+export 'src/lazy_loading_manager.dart';
 export 'src/rough.dart';
-export 'src/rough_web_optimized.dart';
 export 'src/rough_mobile_web.dart';
+export 'src/rough_web_optimized.dart';
+export 'src/web_optimized_generator.dart';
+export 'src/widgets/loading_aware_widgets.dart';

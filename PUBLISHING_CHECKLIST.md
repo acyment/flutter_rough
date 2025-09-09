@@ -1,4 +1,4 @@
-# Publishing Checklist for flutter_rough 2.0.0
+# Publishing Checklist for rough_flutter 0.1.2
 
 This checklist should be followed before publishing the Dart 3 migration to pub.dev.
 
@@ -17,12 +17,12 @@ This checklist should be followed before publishing the Dart 3 migration to pub.
 
 - [x] **Documentation**
   - [x] README.md updated with Dart 3 information
-  - [x] CHANGELOG.md updated with version 2.0.0 details
+  - [x] CHANGELOG.md updated with version 0.1.2 details
   - [x] MIGRATION_GUIDE.md created for users upgrading from 1.x
   - [x] API documentation with dartdoc comments
 
 - [x] **Version Management**
-  - [x] pubspec.yaml version updated to 2.0.0
+  - [x] pubspec.yaml version updated to 0.1.2
   - [x] Breaking changes documented in CHANGELOG.md
 
 - [x] **Package Validation**
@@ -36,8 +36,8 @@ When ready to publish:
 1. **Commit all changes** (optional, but recommended):
    ```bash
    git add .
-   git commit -m "Release version 2.0.0 - Dart 3 migration"
-   git tag v2.0.0
+   git commit -m "Release version 0.1.2"
+   git tag v0.1.2
    git push origin master --tags
    ```
 
@@ -57,16 +57,16 @@ When ready to publish:
 After publication, test in a new Flutter project:
 
 ```bash
-flutter create test_rough
-cd test_rough
-flutter pub add rough
+flutter create test_rough_flutter
+cd test_rough_flutter
+flutter pub add rough_flutter
 ```
 
 Then verify the basic example works:
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:rough/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 void main() {
   runApp(MaterialApp(

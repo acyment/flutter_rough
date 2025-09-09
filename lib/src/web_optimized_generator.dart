@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-import 'filler.dart';
-import 'generator.dart';
 import 'config.dart';
+import 'filler.dart';
 import 'fillers/filler_registry.dart';
+import 'generator.dart';
 import 'lazy_loading_manager.dart';
 
 /// Web-optimized generator that uses lazy loading for better performance

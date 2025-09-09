@@ -114,8 +114,9 @@ class OpSetBuilder {
       }
       return OpSet(type: OpSetType.path, ops: ops);
     } else if (len == 2) {
+      // Two-point path should be a straight line from (x1, y1) to (x2, y2)
       return buildLine(
-          points[0].x, points[0].x, points[1].x, points[1].x, config);
+          points[0].x, points[0].y, points[1].x, points[1].y, config);
     } else {
       return OpSet(type: OpSetType.path, ops: []);
     }

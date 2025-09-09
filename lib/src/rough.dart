@@ -37,8 +37,21 @@ extension Rough on Canvas {
 
           break;
         case OpSetType.fillPath:
-          final Paint fillPaintCopy = fillPaint;
-          fillPaintCopy.style = PaintingStyle.fill;
+          // Create a defensive copy to avoid mutating the caller's Paint
+          final Paint fillPaintCopy = Paint()
+            ..color = fillPaint.color
+            ..blendMode = fillPaint.blendMode
+            ..filterQuality = fillPaint.filterQuality
+            ..isAntiAlias = fillPaint.isAntiAlias
+            ..shader = fillPaint.shader
+            ..colorFilter = fillPaint.colorFilter
+            ..maskFilter = fillPaint.maskFilter
+            ..invertColors = fillPaint.invertColors
+            ..strokeCap = fillPaint.strokeCap
+            ..strokeJoin = fillPaint.strokeJoin
+            ..strokeMiterLimit = fillPaint.strokeMiterLimit
+            ..strokeWidth = fillPaint.strokeWidth
+            ..style = PaintingStyle.fill;
           final Path fillPath = _drawToContext(drawing)..close();
           drawPath(fillPath, fillPaintCopy);
           break;

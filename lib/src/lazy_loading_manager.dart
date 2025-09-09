@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-import 'fillers/filler_registry.dart';
-import 'fillers/basic_fillers.dart';
 import 'fillers/advanced_fillers.dart';
+import 'fillers/basic_fillers.dart';
 import 'fillers/experimental_fillers.dart';
+import 'fillers/filler_registry.dart';
 
 /// Strategy for loading fillers
 enum LoadingStrategy {
@@ -229,4 +229,3 @@ class LazyLoadingManager {
     FillerRegistry.clear();
   }
 }
-

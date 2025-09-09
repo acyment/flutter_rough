@@ -1,11 +1,10 @@
-/// Experimental filler implementations for dynamic loading
-/// 
-/// These are the most complex and specialized fillers that are loaded
-/// only when specifically requested.
+// Experimental filler implementations for dynamic loading
+// These are the most complex and specialized fillers that are loaded
+// only when specifically requested.
 
+import '../core.dart';
 import '../entities.dart';
 import '../filler.dart';
-import '../core.dart';
 import 'filler_registry.dart';
 
 /// Experimental and specialized fillers

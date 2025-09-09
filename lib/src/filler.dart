@@ -1,7 +1,8 @@
 import 'dart:math';
 
-import 'package:rough_flutter/rough_flutter.dart';
-
+import 'config.dart';
+import 'core.dart';
+import 'entities.dart';
 import 'geometry.dart';
 import 'renderer.dart';
 

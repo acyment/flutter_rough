@@ -1,7 +1,3 @@
-/// Basic filler implementations that are always included in the main bundle
-/// 
-/// These are the most commonly used fillers that should be immediately available.
-
 import '../filler.dart';
 import 'filler_registry.dart';
 

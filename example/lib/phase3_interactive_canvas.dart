@@ -3,7 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:rough_flutter/rough_flutter.dart';
 
-import 'interactive_examples.dart';
+import 'interactive_examples.dart' as ie;
 
 /// Phase 3 interactive canvas with lazy loading and advanced optimizations
 class Phase3InteractiveCanvas extends StatelessWidget {
@@ -15,7 +15,7 @@ class Phase3InteractiveCanvas extends StatelessWidget {
     required this.fillerType,
   });
   
-  final InteractiveExample example;
+  final ie.InteractiveExample example;
   final Map<String, double> drawConfigValues;
   final Map<String, double> fillerConfigValues;
   final String fillerType;
@@ -100,7 +100,7 @@ class Phase3InteractivePainter extends RoughMobileWebPainter {
   Phase3InteractivePainter(this.generator, this.interactiveExample);
   
   final WebOptimizedGenerator generator;
-  final InteractiveExample interactiveExample;
+  final ie.InteractiveExample interactiveExample;
 
   @override
   void paintRough(Canvas canvas, Size size, Map<String, dynamic> config) {
@@ -108,15 +108,15 @@ class Phase3InteractivePainter extends RoughMobileWebPainter {
     RoughMobilePerformance.recordFrame();
     
     // Reset randomizer for consistent drawing
-    generator.config.randomizer.reset();
+    generator.drawConfig.randomizer.reset();
     
     // Use the interactive example's paint method
-    interactiveExample.paintRough(canvas, size, generator.config, generator.filler);
+    interactiveExample.paintRough(canvas, size, generator.drawConfig, generator.filler);
   }
 
   @override
   bool shouldRepaint(Phase3InteractivePainter oldDelegate) {
-    return oldDelegate.generator.config != generator.config ||
+    return oldDelegate.generator.drawConfig != generator.drawConfig ||
            oldDelegate.generator.filler != generator.filler;
   }
 }
@@ -124,7 +124,7 @@ class Phase3InteractivePainter extends RoughMobileWebPainter {
 /// Phase 3 enhanced interactive body with lazy loading
 class Phase3InteractiveBody extends StatefulWidget {
   const Phase3InteractiveBody({super.key, required this.example});
-  final InteractiveExample example;
+  final ie.InteractiveExample example;
 
   @override
   State<Phase3InteractiveBody> createState() => _Phase3InteractiveBodyState();

@@ -1,8 +1,3 @@
-/// Advanced filler implementations that can be loaded dynamically
-/// 
-/// These fillers are more complex and less commonly used, making them
-/// good candidates for dynamic loading to reduce initial bundle size.
-
 import '../filler.dart';
 import 'filler_registry.dart';
 

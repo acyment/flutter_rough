@@ -1,6 +1,6 @@
 name: rough_flutter
-description: A Flutter library that allows you to draw in a sketchy, hand-drawn-like style. Forked and maintained version of the original rough package.
-version: 0.1.1
+description: A Flutter library for sketchy, hand-drawn-style graphics. Maintained fork and migration of the original rough package with Dart 3, null safety, and web/mobile optimizations.
+version: 0.1.2
 homepage: https://github.com/acyment/flutter_rough
 repository: https://github.com/acyment/flutter_rough
 
@@ -14,6 +14,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^6.0.0
 
 flutter:

@@ -1,6 +1,6 @@
-[![Pub](https://img.shields.io/pub/v/rough?label=latest%20version)](https://pub.dev/packages/rough)
-[![GitHub Release Date](https://img.shields.io/github/release-date/sergiandreplace/flutter_rough)](https://pub.dev/packages/rough)
-[![GitHub](https://img.shields.io/github/license/sergiandreplace/flutter_rough)](https://github.com/sergiandreplace/flutter_rough/blob/master/LICENSE)
+[![Pub](https://img.shields.io/pub/v/rough_flutter?label=latest%20version)](https://pub.dev/packages/rough_flutter)
+[![GitHub Release Date](https://img.shields.io/github/release-date/acyment/flutter_rough)](https://github.com/acyment/flutter_rough/releases)
+[![GitHub](https://img.shields.io/github/license/acyment/flutter_rough)](https://github.com/acyment/flutter_rough/blob/master/LICENSE)
 ![Dart 3 Compatible](https://img.shields.io/badge/Dart-3.0%2B-blue)
 
 # Rough
@@ -11,12 +11,12 @@ Rough is a library that allows you draw in a sketchy, hand-drawn-like style. It'
 
 This library is now fully compatible with Dart 3 and includes complete null safety support!
 
-## Recent Updates (v0.1.1)
+## Recent Updates (v0.1.2)
 
-- **Package Naming**: Fixed package name consistency (`rough` → `rough_flutter`)
-- **Code Optimization**: Cleaned up unused imports and optimized code structure
-- **Error Handling**: Improved error handling in lazy loading widgets
-- **Build Fixes**: Resolved various build and compatibility issues
+- Fix: Corrected `linearPath` 2-point rendering bug
+- Fix: Prevented `drawRough` from mutating caller `Paint`
+- Docs: Updated badges/imports to `rough_flutter`
+- Docs: Switched screenshots to relative paths for pub.dev
 
 ## Installation
 
@@ -118,7 +118,7 @@ canvas.drawRough(circle, pathPaint, fillPaint);
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:rough_flutter/rough.dart';
+import 'package:rough_flutter/rough_flutter.dart';
 
 class RoughExample extends CustomPainter {
   @override
@@ -206,10 +206,10 @@ final fillerConfig = FillerConfig.build(
 
 Some screenshots of the example app:
 
-![Example 1](https://raw.githubusercontent.com/sergiandreplace/flutter_rough/master/screenshots/example_app_1.jpg)
-![Example 2](https://raw.githubusercontent.com/sergiandreplace/flutter_rough/master/screenshots/example_app_2.jpg)
-![Example 3](https://raw.githubusercontent.com/sergiandreplace/flutter_rough/master/screenshots/example_app_3.jpg)
-![Example 4](https://raw.githubusercontent.com/sergiandreplace/flutter_rough/master/screenshots/example_app_4.jpg)
+![Example 1](screenshots/example_app_1.jpg)
+![Example 2](screenshots/example_app_2.jpg)
+![Example 3](screenshots/example_app_3.jpg)
+![Example 4](screenshots/example_app_4.jpg)
 
 ## Migration from 1.0.0
 

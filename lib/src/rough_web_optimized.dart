@@ -66,7 +66,10 @@ extension RoughWebOptimized on Canvas {
   
   /// Get or create cached paint object
   Paint _getCachedPaint(Paint originalPaint, PaintingStyle? style) {
-    final String key = '${originalPaint.color.value}_${style?.index ?? originalPaint.style.index}_${originalPaint.strokeWidth}';
+    final color = originalPaint.color;
+    final String key = '${color.a}-${color.r}-${color.g}-${color.b}_'
+        '${style?.index ?? originalPaint.style.index}_'
+        '${originalPaint.strokeWidth}';
     
     if (_paintCache.containsKey(key)) {
       return _paintCache[key]!;
